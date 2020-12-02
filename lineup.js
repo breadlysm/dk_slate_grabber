@@ -56,8 +56,8 @@ function downloadAllButton() {
     all_button.innerText = " Download All" 
     all_button.appendChild(button.children[0].cloneNode(true))
     all_button.setAttribute("style", "margin-right: 5px;");
+    all_button.setAttribute("id", "download-all");
     all_button.href = "javascript:void(0)"
-    all_button.onclick = createZip()
     div.insertBefore(all_button,div.children[7])
 }
 
@@ -86,3 +86,9 @@ function createZip() {
 
 }
 downloadAllButton()
+
+var allClick = document.querySelector("#download-all")
+if (allClick) {
+    allClick.addEventListener ("click", createZip , false);
+}
+
