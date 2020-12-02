@@ -4,7 +4,7 @@
 // @version      0.14
 // @description  When you go to the lineup upload page on Draftkings, this script will grab all available lineups, name them appropriately and allow download as zip. 
 // @author       breadlysm
-// @include       https://www.draftkings.com/lineup/upload#
+// @include      https://www.draftkings.com/lineup/upload
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js
