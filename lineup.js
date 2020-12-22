@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DK Lineup Grabber
 // @namespace    http://tampermonkey.net/
-// @version      0.14
+// @version      0.3
 // @description  When you go to the lineup upload page on Draftkings, this script will grab all available lineups, name them appropriately and allow download as zip. 
 // @author       breadlysm
 // @include      https://www.draftkings.com/lineup/upload
@@ -22,7 +22,6 @@ function getGroupIDs() {
         var groupId = slateList[i].children[0].getAttribute("data-draft-group-id")
         if (contestType == "SHOWDOWN CAPTAIN MODE") {
             filename = filename + " - " + game_desc
-            filename = filename + " " + gametime
         } else if (contestType == "CLASSIC") {
             if (game_desc) {
                 filename = filename + " - " + game_desc
@@ -30,7 +29,6 @@ function getGroupIDs() {
                 filename = filename + " - All Games"
             }
         }
-
         groups.push({
             filename: filename,
             groupId: groupId,
@@ -49,11 +47,10 @@ function getURL(groupId) {
 
 
 function downloadAllButton() {
-    //will need to change href all_button.href = "http://google.com"
     var div = document.querySelector("div.lineup-upload-left > div")
     var button = div.children[6]
     var all_button = button.cloneNode(true)
-    all_button.innerText = " Download All" 
+    all_button.innerText = " Download All"
     all_button.appendChild(button.children[0].cloneNode(true))
     all_button.setAttribute("style", "margin-right: 5px;");
     all_button.setAttribute("id", "download-all");
@@ -62,12 +59,10 @@ function downloadAllButton() {
 }
 
 function createZip() {
-    // button.onclick = function() {
     var count = 0;
     var zip = new JSZip();
     var urls = getGroupIDs()
     urls.forEach(function(entry) {
-        // TODO: Normalize filenames
         var filename = entry.filename;
         var url = entry.url;
         JSZipUtils.getBinaryContent(url, function (err, data) {
@@ -82,13 +77,9 @@ function createZip() {
             }
         });
     });
-   // };
-
 }
 downloadAllButton()
-
 var allClick = document.querySelector("#download-all")
 if (allClick) {
     allClick.addEventListener ("click", createZip , false);
 }
-
